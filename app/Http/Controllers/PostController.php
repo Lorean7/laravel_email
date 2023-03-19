@@ -42,11 +42,12 @@ class PostController extends Controller
         $message_model->message = $form_message;
         $message_model->id_post = $current_post_id;
         $message_model->save();
-        dd('message_data_save');
+        dump('message_data_save');
 
             foreach ($users as $user){
                 $login = $user['login'];
                 $email = $user['email'];
+                
             
                     // SMTP settings for Yandex
                 $mail = new PHPMailer(true); // Create a new PHPMailer instance
@@ -58,7 +59,7 @@ class PostController extends Controller
                 $mail->Password = 'fiywnosdepeewtej'; // Use the password generated for other applications
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
-                $mail->Subject = 'theme mail';
+                $mail->Subject = 'New message for u :)';
                 
                 $mail->setFrom('Del1verer@yandex.ru', 'AdminServ');
                 $mail->addAddress( $email, $login);
@@ -103,9 +104,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function checkData()
     {
         //
+        $message = Message::all();
+        return response()->json(['messages' => $message]);
     }
 
     /**
@@ -114,10 +117,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function processData(Request $request)
     {
         //
-    }
+        $data = $request->json()->all();
+        dump($data);
+        // обрабатываем данные и выводим результаты на страницу
+        }
 
     /**
      * Display the specified resource.

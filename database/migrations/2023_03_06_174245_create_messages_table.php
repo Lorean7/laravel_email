@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('id_post')->nullable();
             $table->string('author')->nullable();
             $table->string('message')->nullable();
+            $table->json('followers')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

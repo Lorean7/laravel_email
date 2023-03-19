@@ -25,3 +25,7 @@ Route::match(['get','post'],'/auth',[UserController::class,'auth'])->name('auth'
 Route::match(['get','post'],'/personal',[UserController::class,'personal'])->name('personal');
 
 Route::match(['get','post'],'/user/add',[PostController::class,'add']);
+
+Route::match(['get','post'],'/message',[PostController::class,'checkData']);
+
+Route::match(['get','post'],'/process-data',[PostController::class,'processData']);
